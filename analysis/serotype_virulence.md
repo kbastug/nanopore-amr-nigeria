@@ -24,20 +24,8 @@ https://cge.food.dtu.dk/cgi-bin/webface.fcgi?jobid=69553B3E00004298C0C915F3
 
 ### Isolate: JUTH_Ecoli_02
 - **Virulence genes identified:**
-  - cib
-  - cma
-  - etsC
-  - fimH
-  - gad
-  - hlyF
-  - iroN
-  - iss
-  - papA_F19
-  - sitA
-  - tia
-  - traJ
-  - traT
-  - tsh
+  - cib, cma, etsC, fimH, gad, hlyF, iroN, iss, papA_F19, sitA, tia, traJ, traT, tsh
+  - No Shiga-toxin producing genes
 
 ## Notes
 - Default thresholds from the CGE tools were used unless otherwise specified.
