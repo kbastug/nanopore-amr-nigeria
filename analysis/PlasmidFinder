@@ -1,0 +1,44 @@
+# Plasmid Replicon Detection (PlasmidFinder)
+
+## Source
+Plasmid replicon detection was performed using the PlasmidFinder web tool hosted by the Danish Technical University Center for Genomic Epidemiology (CGE).
+
+---
+
+## Tool Used
+
+### PlasmidFinder
+
+- **Platform:** PlasmidFinder via the Danish Technical University Center for Genomic Epidemiology (CGE)
+- **Analysis type:** Whole-genome sequence (FASTA)
+- **Purpose:** Identification of plasmid replicon sequences to infer plasmid presence and incompatibility groups
+- **Threshold for reporting:** 100% identity
+
+---
+
+## Input Files
+
+- `JUTH_Ecoli_01.fasta`
+- `JUTH_Ecoli_02.fasta`
+
+---
+
+## Analysis Summary
+
+Assembled genome FASTA files were uploaded to PlasmidFinder to identify plasmid replicon sequences. Detection of plasmid replicons was used to support differentiation of chromosomal and plasmid-associated contigs and to contextualize antimicrobial resistance gene localization.
+
+PlasmidFinder results provide information on plasmid incompatibility groups but do not determine plasmid structure, copy number, or mobility. Replicon detection was therefore interpreted in conjunction with assembly characteristics and antimicrobial resistance gene annotations.
+
+---
+
+## Notes
+
+- Analyses were performed using default PlasmidFinder settings unless otherwise specified.
+- Presence of a plasmid replicon indicates likely plasmid origin but does not confirm plasmid completeness.
+- PlasmidFinder results were used for research and surveillance purposes and do not replace experimental plasmid validation.
+
+---
+
+## Citations
+
+- Carattoli A et al. (2014). *In silico detection and typing of plasmids using PlasmidFinder and plasmid multilocus sequence typing.* **Antimicrobial Agents and Chemotherapy**, 58(7):3895–3903.
