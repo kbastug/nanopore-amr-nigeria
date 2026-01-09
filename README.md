@@ -17,7 +17,7 @@ Genome assembly was performed on a high-performance computing (HPC) cluster usin
 ## Repository Structure
 
 - `hpc/` – Command-line scripts used for genome assembly
-- `galaxy/` – Documentation of Galaxy-based analyses and parameters
+- `analysis/` – Documentation of analyses and parameters
 - `software_versions.txt` – Software tools and versions used
 
 ## Data Availability
