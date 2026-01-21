@@ -7,7 +7,7 @@ Antimicrobial resistance (AMR) gene detection was performed using two publicly a
 
 ## Tools Used
 
-### CARD (Resistance Gene Identifier, RGI)
+### CARD v4.0.1  (Resistance Gene Identifier, RGI Main v6.0.5) accessed via the Danish Technical University (DTU) Center for Genomic Epidemiology (CGE)
 
 - **Platform:** Comprehensive Antimicrobial Resistance Database (CARD)
 - **Tool:** RGI (web-based interface)
@@ -34,10 +34,11 @@ Antimicrobial resistance (AMR) gene detection was performed using two publicly a
 
 ## Analysis Summary
 
-Assembled genome FASTA files were independently uploaded to CARD and ResFinder for AMR gene detection. Both tools were used to provide complementary perspectives on antimicrobial resistance:
+Assembled genome FASTA files were independently uploaded to CARD and ResFinder for AMR gene detection. 
 
-Only AMR gene hits meeting a 100% identity threshold were reported. Results from both tools were compared to contextualize resistance predictions and inform downstream interpretation.
+CARD: Individual contigs were uploaded to CARD and analyzed for “Perfect and Strict hits only,” excluding nudge, and used the “High quality/coverage” input parameter. Only hits with 100% similarity (“Perfect”) were counted. 
 
+ResFinder: Complete FASTA files were uploaded to ResFinder, which searched for acquired AMR gene hits and chromosomal mutations mediating AMR. Match criteria was set to 100% accuracy and minimum 60% length for the organism “Escherichia coli.”
 ---
 
 ## Notes
