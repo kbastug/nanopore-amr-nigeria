@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -euo pipefail
+
+CSV="/users/5/bastu004/Nigeria2025_barcodes/TopAccessions.csv"
+ASSEMBLY_DIR="/users/5/bastu004/Nigeria2025_barcodes/assembled_fastas"
+REF_DIR="${ASSEMBLY_DIR}/references"
+OUT_DIR="${ASSEMBLY_DIR}/fastani_results"
+SUMMARY="${OUT_DIR}/fastani_summary.csv"
+
+mkdir -p "$REF_DIR" "$OUT_DIR"
+
+echo "assembly,accession,reference_fasta,ani,shared_fragments,total_fragments" > "$SUMMARY"
+
+tail -n +2 "$CSV" | while IFS=, read -r assembly accession
+do
+    assembly=$(echo "$assembly" | tr -d '\r' | xargs)
+    accession=$(echo "$accession" | tr -d '\r' | xargs)
+
+    query="${ASSEMBLY_DIR}/${assembly}"
+    zipfile="${REF_DIR}/${accession}.zip"
+    unzipdir="${REF_DIR}/${accession}_unzipped"
+    out="${OUT_DIR}/${assembly%.fasta}_vs_${accession}.txt"
+
+    echo "-----------------------------"
+    echo "Assembly: $assembly"
+    echo "Accession: $accession"
+
+    if [ ! -f "$query" ]; then
+        echo "Query assembly not found: $query"
+        echo "${assembly},${accession},NA,NA,NA,NA" >> "$SUMMARY"
+        continue
+    fi
+
+    if [ ! -d "$unzipdir" ]; then
+        echo "Downloading reference for $accession"
+        datasets download genome accession "$accession" --filename "$zipfile"
+        unzip -o "$zipfile" -d "$unzipdir" >/dev/null
+    fi
+
+    ref=$(find "$unzipdir" -type f \( -name "*.fna" -o -name "*.fna.gz" \) | head -n 1)
+
+    if [ -z "$ref" ]; then
+        echo "Reference FASTA not found for $accession"
+        echo "${assembly},${accession},NA,NA,NA,NA" >> "$SUMMARY"
+        continue
+    fi
+
+    fastANI -q "$query" -r "$ref" -o "$out"
+
+    if [ -s "$out" ]; then
+        ani=$(awk '{print $3}' "$out")
+        shared=$(awk '{print $4}' "$out")
+        total=$(awk '{print $5}' "$out")
+        echo "${assembly},${accession},$(basename "$ref"),${ani},${shared},${total}" >> "$SUMMARY"
+    else
+        echo "${assembly},${accession},$(basename "$ref"),NA,NA,NA" >> "$SUMMARY"
+    fi
+done
+
+echo "Done."
+echo "Summary file: $SUMMARY"
