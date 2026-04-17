@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Batch Prokka annotation script
+# Annotates all assembly_*.fasta files and extracts CDS counts
+
+set -uo pipefail
+
+ASSEMBLY_DIR="$(pwd)"
+SUMMARY="${ASSEMBLY_DIR}/prokka_summary.csv"
+
+echo "assembly,predicted_coding_sequences" > "$SUMMARY"
+
+for fasta in assembly_*.fasta
+do
+    sample="${fasta%.fasta}"
+    outdir="${sample}_prokka"
+    prefix="${sample}"
+
+    echo "----------------------------------"
+    echo "Running Prokka on ${fasta}"
+
+    # Run Prokka (continue even if one fails)
+    if ! prokka "$fasta" --outdir "$outdir" --prefix "$prefix" --force; then
+        echo "Prokka failed for ${fasta}"
+        echo "${fasta},NA" >> "$SUMMARY"
+        continue
+    fi
+
+    txt_file="${outdir}/${prefix}.txt"
+
+    if [ ! -f "$txt_file" ]; then
+        echo "Summary file missing for ${fasta}"
+        echo "${fasta},NA" >> "$SUMMARY"
+        continue
+    fi
+
+    cds=$(grep '^CDS:' "$txt_file" | awk '{print $2}')
+
+    if [ -z "${cds:-}" ]; then
+        cds="NA"
+    fi
+
+    echo "${fasta},${cds}" >> "$SUMMARY"
+done
+
+echo "----------------------------------"
+echo "Done."
+echo "Summary file: $SUMMARY"
