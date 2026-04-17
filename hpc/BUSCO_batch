@@ -1,0 +1,104 @@
+# BUSCO + basic assembly stats pipeline
+
+This workflow:
+- runs BUSCO on all `assembly_*.fasta` genomes using `bacteria_odb10`
+- extracts BUSCO completeness metrics into `busco_summary.csv`
+- calculates gap count (N) and GC content into `assembly_basic_stats.csv`
+- optionally merges both into `final_qc_table.csv`
+
+## Requirements
+- BUSCO
+- Python 3
+- pandas (for merging step only)
+
+## Outputs
+- `busco_summary.csv`
+- `assembly_basic_stats.csv`
+- `final_qc_table.csv`
+
+
+#BUSCO batch script
+#!/bin/bash
+
+set -euo pipefail
+
+ASSEMBLY_DIR="/users/5/bastu004/Nigeria2025_barcodes/assembled_fastas"
+SUMMARY="${ASSEMBLY_DIR}/busco_summary.csv"
+
+echo "assembly,busco_complete,busco_single,busco_duplicate,busco_fragmented,busco_missing,busco_n_searched" > "$SUMMARY"
+
+cd "$ASSEMBLY_DIR"
+
+for fasta in assembly_*.fasta
+do
+    sample="${fasta%.fasta}"
+    outdir="${sample}_busco"
+
+    echo "Running BUSCO on ${fasta}"
+
+    busco -i "$fasta" -o "$outdir" -l bacteria_odb10 -m genome --offline --force
+
+    summary_file=$(find "$outdir" -type f -name "short_summary*.txt" | head -n 1)
+
+    if [ -z "$summary_file" ]; then
+        echo "${fasta},NA,NA,NA,NA,NA,NA" >> "$SUMMARY"
+        continue
+    fi
+
+    line=$(grep 'C:' "$summary_file" | head -n 1)
+
+    complete=$(echo "$line" | sed -E 's/.*C:([0-9.]+)%\[S:.*/\1/')
+    single=$(echo "$line"   | sed -E 's/.*\[S:([0-9.]+)%,D:.*/\1/')
+    duplicate=$(echo "$line"| sed -E 's/.*D:([0-9.]+)%\],F:.*/\1/')
+    fragmented=$(echo "$line" | sed -E 's/.*F:([0-9.]+)%,M:[0-9.]+%,n:[0-9]+.*/\1/')
+    missing=$(echo "$line" | sed -E 's/.*M:([0-9.]+)%,n:[0-9]+.*/\1/')
+    n_searched=$(echo "$line" | sed -E 's/.*n:([0-9]+).*/\1/')
+
+    echo "${fasta},${complete},${single},${duplicate},${fragmented},${missing},${n_searched}" >> "$SUMMARY"
+done
+
+echo "Done."
+echo "Summary file: $SUMMARY"
+
+
+
+###COUNT G and C in FASTA
+import csv
+from pathlib import Path
+
+assembly_dir = Path("/users/5/bastu004/Nigeria2025_barcodes/assembled_fastas")
+out_file = assembly_dir / "assembly_basic_stats.csv"
+
+with open(out_file, "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["assembly", "gaps_N", "gc_content"])
+
+    for fasta in sorted(assembly_dir.glob("assembly_*.fasta")):
+        seq = []
+        with open(fasta) as fh:
+            for line in fh:
+                if not line.startswith(">"):
+                    seq.append(line.strip().upper())
+        seq = "".join(seq)
+
+        n_count = seq.count("N")
+        a = seq.count("A")
+        c = seq.count("C")
+        g = seq.count("G")
+        t = seq.count("T")
+        gc = round((g + c) / (a + c + g + t) * 100, 2) if (a + c + g + t) else "NA"
+
+        writer.writerow([fasta.name, n_count, gc])
+
+print(f"Wrote {out_file}")
+
+###OPTIONAL MERGE BUSCO AND G/C INTO ONT TABLE
+import pandas as pd
+
+busco = pd.read_csv("busco_summary.csv")
+stats = pd.read_csv("assembly_basic_stats.csv")
+
+merged = pd.merge(busco, stats, on="assembly")
+merged.to_csv("final_qc_table.csv", index=False)
+
+print(merged)
