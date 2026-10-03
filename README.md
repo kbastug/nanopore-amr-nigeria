@@ -47,7 +47,7 @@ Assembly commands and HPC examples are provided in the `hpc/` directory.
 
 Assembly completeness was assessed using **BUSCO v6.0.0** with the **`bacteria_odb10`** lineage dataset on MSI.
 
-BUSCO completeness, duplication, fragmentation, and missing-ortholog metrics were used as complementary measures of genome completeness and to identify assemblies requiring additional investigation. BUSCO completeness was not interpreted as a direct measure of base-level assembly accuracy.
+BUSCO completeness and duplication were used as complementary measures of genome completeness and to identify assemblies requiring additional investigation. BUSCO completeness was not interpreted as a direct measure of base-level assembly accuracy.
 
 ### 4. Taxonomic identification
 
