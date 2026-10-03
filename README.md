@@ -8,7 +8,7 @@ The workflows support the manuscript:
 
 ## Overview
 
-Nanopore sequencing was performed on site at Jos University Teaching Hospital (JUTH), Nigeria. Raw nanopore sequencing data were subsequently re-base-called and analyzed using a combination of high-performance computing (HPC) resources at the Minnesota Supercomputing Institute (MSI), publicly available web-based bioinformatics platforms, and freely available command-line tools.
+Nanopore sequencing was performed on site at Jos University Teaching Hospital (JUTH), Nigeria. Raw nanopore sequencing data were subsequently re-base-called and analyzed using a combination of high-performance computing resources at the Minnesota Supercomputing Institute (MSI), publicly available web-based bioinformatics platforms, and freely available command-line tools.
 
 The primary workflow included:
 
@@ -39,15 +39,15 @@ Demultiplexing performance was assessed by comparing reads assigned to expected 
 
 ### 2. De novo genome assembly
 
-Quality-filtered FASTQ files were assembled de novo using **Flye** on MSI.
+Quality-filtered FASTQ files were assembled de novo using **Flye v2.9.5-b1801** on MSI.
 
 Assembly commands and HPC examples are provided in the `hpc/` directory.
 
 ### 3. Assembly quality assessment
 
-Assembly characteristics were evaluated using standard genome assembly metrics and BUSCO analyses.
+Assembly completeness was assessed using **BUSCO v6.0.0** with the **`bacteria_odb10`** lineage dataset on MSI.
 
-BUSCO completeness and duplication metrics were used as complementary measures of genome completeness and to identify assemblies requiring additional investigation. BUSCO completeness was not interpreted as a direct measure of base-level assembly accuracy.
+BUSCO completeness, duplication, fragmentation, and missing-ortholog metrics were used as complementary measures of genome completeness and to identify assemblies requiring additional investigation. BUSCO completeness was not interpreted as a direct measure of base-level assembly accuracy.
 
 ### 4. Taxonomic identification
 
