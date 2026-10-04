@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Batch Prokka annotation workflow
+# Prokka version: 1.15.16
+
+for fasta in assembly_*.fasta
+do
+    sample="${fasta%.fasta}"
+
+    prokka \
+      "$fasta" \
+      --outdir "${sample}_prokka" \
+      --prefix "$sample"
+done
