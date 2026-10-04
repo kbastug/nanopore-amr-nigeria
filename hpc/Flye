@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Example Flye de novo assembly workflow used on MSI
+# Flye version: 2.9.5-b1801
+
+flye \
+  --nano-raw sample_pass.fastq \
+  --out-dir flye_sample \
+  --threads 8
