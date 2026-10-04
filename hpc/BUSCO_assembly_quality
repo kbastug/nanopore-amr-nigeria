@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Example BUSCO workflow used on MSI
+# BUSCO version: 6.0.0
+# Lineage dataset: bacteria_odb10
+# Analysis mode: genome
+
+ASSEMBLY_DIR="/path/to/assembled_fastas"
+SUMMARY="${ASSEMBLY_DIR}/busco_summary.csv"
+
+echo "assembly,busco_complete,busco_single,busco_duplicate,busco_fragmented,busco_missing,busco_n_searched" > "$SUMMARY"
+
+cd "$ASSEMBLY_DIR"
+
+for fasta in assembly_*.fasta
+do
+    sample="${fasta%.fasta}"
+    outdir="${sample}_busco"
+
+    echo "Running BUSCO on ${fasta}"
+
+    busco \
+        -i "$fasta" \
+        -o "$outdir" \
+        -l bacteria_odb10 \
+        -m genome \
+        --offline \
+        --force
+
+    summary_file=$(find "$outdir" -type f -name "short_summary*.txt" | head -n 1)
+
+    if [ -z "$summary_file" ]; then
+        echo "${fasta},NA,NA,NA,NA,NA,NA" >> "$SUMMARY"
+        continue
+    fi
+
+    line=$(grep 'C:' "$summary_file" | head -n 1)
+
+    complete=$(echo "$line" | sed -E 's/.*C:([0-9.]+)%\[S:.*/\1/')
+    single=$(echo "$line" | sed -E 's/.*\[S:([0-9.]+)%,D:.*/\1/')
+    duplicate=$(echo "$line" | sed -E 's/.*D:([0-9.]+)%\],F:.*/\1/')
+    fragmented=$(echo "$line" | sed -E 's/.*F:([0-9.]+)%,M:[0-9.]+%,n:[0-9]+.*/\1/')
+    missing=$(echo "$line" | sed -E 's/.*M:([0-9.]+)%,n:[0-9]+.*/\1/')
+    n_searched=$(echo "$line" | sed -E 's/.*n:([0-9]+).*/\1/')
+
+    echo "${fasta},${complete},${single},${duplicate},${fragmented},${missing},${n_searched}" >> "$SUMMARY"
+done
+
+echo "Done."
+echo "Summary file: $SUMMARY"
