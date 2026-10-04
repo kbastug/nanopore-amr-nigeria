@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Example RagTag reference-guided scaffolding workflow used on MSI
+# RagTag version: 2.1.0
+# Reference genome used for S7: NZ_CP024795.1
+
+ragtag.py scaffold \
+  reference_genome.fasta \
+  sample_assembly.fasta \
+  -o ragtag_output
