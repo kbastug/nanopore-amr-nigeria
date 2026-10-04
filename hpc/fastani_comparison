@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Example FastANI workflow used on MSI
+# FastANI version: 1.34
+
+# Compare a single assembled genome to a reference genome
+fastANI \
+  -q sample_assembly.fasta \
+  -r reference_genome.fasta \
+  -o sample_vs_reference.tsv
+
+
+# Optional: compare multiple query assemblies against multiple references
+fastANI \
+  --ql query_genomes.txt \
+  --rl reference_genomes.txt \
+  -o fastani_results.tsv
