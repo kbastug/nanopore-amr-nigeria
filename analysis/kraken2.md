@@ -37,3 +37,12 @@ kraken2 \
   --report sample.kraken2.report.txt \
   --output sample.kraken2.output.txt \
   sample.fasta
+
+# For samples that did not generate a successful de novo assembly,
+# quality-filtered FASTQ reads were analyzed using the local MSI Kraken2 installation.
+
+kraken2 \
+  --db /path/to/kraken2_db \
+  --report sample_kraken_report.txt \
+  --output sample_kraken_output.txt \
+  sample_pass.fastq
