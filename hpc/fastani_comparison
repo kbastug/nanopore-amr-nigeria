@@ -15,3 +15,6 @@ fastANI \
   --ql query_genomes.txt \
   --rl reference_genomes.txt \
   -o fastani_results.tsv
+
+# Individual contigs from assemblies suspected to contain multiple organisms
+# were compared separately against candidate reference genomes.
