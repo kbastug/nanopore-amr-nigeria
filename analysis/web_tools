@@ -1,0 +1,63 @@
+# Web-based bioinformatics tools
+
+This study used several publicly available web-based bioinformatics platforms for taxonomic identification, antimicrobial resistance gene characterization, plasmid analysis, and in-silico serotyping.
+
+## KmerFinder
+
+- Platform: DTU Center for Genomic Epidemiology
+- KmerFinder version: 3.2
+- Software version: 3.0.2
+- Database version: 2022-07-11
+- Purpose: Species identification of successfully assembled genomes
+
+## Pathogenwatch / Speciator
+
+- Pathogenwatch version: 23.5.6
+- Species identification pipeline: Speciator
+- Purpose: Independent species identification of assembled genomes
+
+## CARD / RGI
+
+- RGI version: 6.0.5
+- CARD database version: 4.0.1
+- Input: Assembled genome FASTA
+- Retained hits: Perfect and Strict
+- Nudge hits excluded
+- High quality/coverage option applied
+- Minimum identity threshold: 100%
+- Minimum coverage threshold: 60%
+
+## ResFinder
+
+- ResFinder version: 4.7.2
+- Database version: 2.5.1
+- Platform: DTU Center for Genomic Epidemiology
+- Minimum identity threshold: 100%
+- Minimum coverage threshold: 60%
+
+## PlasmidFinder
+
+- Web-tool version: 2.1
+- Software version: 2.0.1 (2020-07-01)
+- Database version: 2023-01-18
+- Platform: DTU Center for Genomic Epidemiology
+- Minimum identity threshold: 100%
+- Minimum coverage threshold: 60%
+- Applied to specimens with at least one detected AMR gene
+
+## SerotypeFinder
+
+- Web-tool version: 2.0
+- Software version: 2.0.1 (2020-07-27)
+- Database version: 1.0.0 (2022-05-16)
+- Platform: DTU Center for Genomic Epidemiology
+- Minimum identity threshold: 95%
+- Minimum coverage threshold: 60%
+- Purpose: In-silico serotyping of Escherichia coli isolates
+
+## Galaxy Kraken2
+
+- Galaxy platform version: 24.2
+- Kraken2 version: 2.1.3
+- Database: 2025-02-05T2046097_standard_prebuilt_core_nt_2024-0904
+- Purpose: Taxonomic identification of assembled genomes
