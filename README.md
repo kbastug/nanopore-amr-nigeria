@@ -31,7 +31,7 @@ Sequencing was performed using Oxford Nanopore technology and MinKNOW.
 
 All POD5 files were subsequently re-base-called using Dorado with the super-high-accuracy model:
 
-`dna_r10.4.1_e8.2_400bps_sup@v4.3.0`
+`dna_r10.4.1_e8.2_400bps_5khz_sup.cfg`
 
 A minimum read quality threshold of **Q10** was applied to sequencing reads used for downstream analysis.
 
