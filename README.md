@@ -117,7 +117,7 @@ These tools evaluate O- and H-antigen-associated genes to support genomic seroty
 
 ## Repository Structure
 
-- `hpc/` – Example command-line and HPC scripts used for basecalling, assembly, and other MSI-based analyses
+- `hpc/` – Example command-line and HPC scripts used for assembly and downstream analysis
 - `analysis/` – Documentation of downstream analyses, parameters, and example workflows
 - `software_versions.txt` – Software, database, model, and platform versions used in the study
 - `README.md` – Overview of the bioinformatics workflow and repository organization
