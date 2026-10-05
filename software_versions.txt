@@ -1,18 +1,20 @@
-ONT basecalling software	v7.6.7+de8939544	dna_r10.4.1_e8.2_400bps_5khz_sup.cfg	minimum Q-score 10; barcode kit SQK-RBK114-24	EPI2ME/Dorado environment
+Tool	Version	Database / model / additional version information	Platform
+
+ONT basecalling software	v7.6.7+de8939544	dna_r10.4.1_e8.2_400bps_5khz_sup.cfg; minimum Q-score 10; barcode kit SQK-RBK114-24	EPI2ME/Dorado environment
 Flye	v2.9.5-b1801	Python v3.12.9	MSI
 BUSCO	v6.0.0	bacteria_odb10	MSI
 
 KmerFinder	v3.2	software v3.0.2; database 2022-07-11	DTU Center for Genomic Epidemiology
 Kraken2	v2.1.3	database 2025-02-05T2046097_standard_prebuilt_core_nt_2024-0904	Galaxy Bioinformatics Platform v24.2
 Kraken2	v2.17.1	PlusPF database built 2021-05-17; 95 GB	MSI
-Galaxy Bioinformatics Platform	v24.2	usegalaxy.org
+Galaxy Bioinformatics Platform	v24.2	usegalaxy.org	Web
 
-Pathogenwatch	v23.5.6	Speciator pipeline	web-based
+Pathogenwatch	v23.5.6	Speciator pipeline	Web
 Prokka	v1.15.16	bacterial annotation workflow	MSI
-FastANI	v1.34	MSI
-RagTag	v2.1.0	MSI
+FastANI	v1.34	—	MSI
+RagTag	v2.1.0	—	MSI
 
-CARD RGI	v6.0.5	CARD database v4.0.1	web-based
+CARD RGI	v6.0.5	CARD database v4.0.1	Web
 ResFinder	v4.7.2	database v2.5.1	DTU Center for Genomic Epidemiology
 PlasmidFinder	v2.1	software v2.0.1 (2020-07-01); database 2023-01-18	DTU Center for Genomic Epidemiology
 
