@@ -1,34 +1,46 @@
-# In Silico Serotyping and Virulence Gene Detection
+# In Silico Serotyping of Escherichia coli Isolates
 
-## Source
-Results generated using the Danish Technical University Center for Genomic Epidemiology (CGE) web tools.
+## Overview
 
-Online report reference:  
-https://cge.food.dtu.dk/cgi-bin/webface.fcgi?jobid=69553B3E00004298C0C915F3
+In-silico serotyping was performed for the two assembled genomes identified as *Escherichia coli* using two complementary approaches:
 
-## Tools Used
-- **VirulenceFinder** (identifies virulence-associated genes including toxin genes)
-- Analysis based on assembled genome FASTA files.
-- Threshold set to 100% match
+1. **SerotypeFinder** through the Danish Technical University Center for Genomic Epidemiology (CGE)
+2. **ECTyper** using the Minnesota Supercomputing Institute (MSI)
+
+Both tools were used to support assignment of O- and H-antigen serotypes.
 
 ## Input Files
+
 - `JUTH_Ecoli_01.fasta`
 - `JUTH_Ecoli_02.fasta`
 
-## Summary of Results
+## SerotypeFinder
 
-### Isolate: JUTH_Ecoli_01
-- **Virulence genes identified:**
-  - Cea, csgA, fimH, gad, mchC, mchF, terC, traT
-  - No Shiga-toxin producing genes
+SerotypeFinder was accessed through the CGE web platform.
 
-### Isolate: JUTH_Ecoli_02
-- **Virulence genes identified:**
-  - cib, cma, etsC, fimH, gad, hlyF, iroN, iss, papA_F19, sitA, tia, traJ, traT, tsh
-  - No Shiga-toxin producing genes
+- Tool version: 2.0
+- Software version: 2.0.1 (2020-07-27)
+- Database version: 1.0.0 (2022-05-16)
+- Minimum identity threshold: 95%
+- Minimum coverage threshold: 60%
+- Input: assembled genome FASTA files
 
-## Notes
-- Default thresholds from the CGE tools were used unless otherwise specified.
-- Presence of Shiga toxin genes (e.g., *stx1*, *stx2*) is necessary to confirm STEC designation; absence indicates that serotype assignment alone does not confirm Shiga toxin–producing capability.
-- CGE results were downloaded on [12/31/2025].
+SerotypeFinder identifies genes associated with *E. coli* O- and H-antigen serotypes and reports sequence identity and coverage for detected targets.
 
+## ECTyper
+
+ECTyper was run locally on MSI.
+
+- ECTyper version: 2.0.0
+- Database version: 1.0
+- Input: assembled genome FASTA files
+
+ECTyper identifies O- and H-antigen-associated genes, including loci such as `wzx`, `wzy`, and `fliC`, using its internal alignment and scoring criteria.
+
+Percent identity and sequence coverage for detected serotype-associated genes were extracted from the output and used to support serotype assignments.
+
+## Interpretation
+
+Serotype assignments were based on concordant or complementary evidence from SerotypeFinder and ECTyper. O- and H-antigen predictions were interpreted using the sequence identity, coverage, and gene-detection results reported by each platform.
+
+These analyses were used for serotype identification only. Virulence gene detection was not included in the final analysis workflow described in the manuscript.
