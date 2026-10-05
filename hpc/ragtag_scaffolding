@@ -8,3 +8,9 @@ ragtag.py scaffold \
   reference_genome.fasta \
   sample_assembly.fasta \
   -o ragtag_output
+
+# Study-specific example:
+# ragtag.py scaffold \
+#   barcode07_refs/NZ_CP024795.1.fasta \
+#   assembly_07.fasta \
+#   -o ragtag_barcode07_paenibacillus
