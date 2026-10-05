@@ -3,7 +3,15 @@
 # Example Flye de novo assembly workflow used on MSI
 # Flye version: 2.9.5-b1801
 
+#SBATCH --job-name=flye_example
+#SBATCH --output=flye_%j.out
+#SBATCH --error=flye_%j.err
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64G
+#SBATCH --partition=standard
+
 flye \
-  --nano-raw sample_pass.fastq \
-  --out-dir flye_sample \
+  --nano-raw /path/to/sample/*.fastq \
+  --out-dir /path/to/flye_output/sample \
   --threads 8
