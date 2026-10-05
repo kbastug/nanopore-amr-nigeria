@@ -22,14 +22,16 @@ Kraken2 was also run locally on the Minnesota Supercomputing Institute (MSI).
 - Database: PlusPF
 - Database build date: May 17, 2021
 - Database size: 95 GB
-- Input: Assembled genomes or individual contigs
+- Input: Assembled genomes, individual contigs, or quality-filtered FASTQ reads
 - Output: Kraken2 classification reports and taxonomic assignments
 
 Individual contigs were analyzed separately when assembly results suggested the presence of more than one bacterial taxon.
 
-Example:
+Example commands:
 
 ```bash
+# Assembly or individual-contig analysis
+
 kraken2 \
   --db /path/to/kraken2_db \
   --threads 8 \
@@ -38,6 +40,8 @@ kraken2 \
   --output sample.kraken2.output.txt \
   sample.fasta
 
+
+# Raw-read analysis
 # For samples that did not generate a successful de novo assembly,
 # quality-filtered FASTQ reads were analyzed using the local MSI Kraken2 installation.
 
