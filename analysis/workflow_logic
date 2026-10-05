@@ -1,0 +1,32 @@
+# Analysis workflow
+
+Quality-filtered nanopore reads were processed according to the following workflow.
+
+## Successful de novo assembly
+
+For samples generating a usable Flye assembly:
+
+1. Assembly completeness was evaluated with BUSCO.
+2. Species identification was performed using:
+   - KmerFinder
+   - Kraken2 through Galaxy
+   - Kraken2 on MSI
+   - Pathogenwatch / Speciator
+   - NCBI Taxonomy Browser for manual taxonomic cross-referencing
+3. Assemblies were annotated using Prokka.
+4. FastANI was used to compare assemblies with reference genomes identified through KmerFinder.
+5. Assemblies with successful species identification were evaluated for antimicrobial resistance genes using CARD and ResFinder.
+6. Additional PlasmidFinder or serotyping analyses were performed where applicable.
+
+## Unsuccessful de novo assembly
+
+For samples that did not generate a successful Flye assembly, quality-filtered FASTQ reads were analyzed directly using Kraken2 on MSI.
+
+Raw reads were not uploaded to public web-based analysis platforms because of the possibility that unassembled reads could contain human DNA.
+
+## Sample-specific analyses
+
+Additional analyses were performed when initial genomic results required further investigation.
+
+- Individual contigs from an assembly with a high BUSCO duplication score were analyzed separately using KmerFinder, Kraken2, and FastANI to investigate evidence of multiple bacterial organisms.
+- A highly fragmented *Paenibacillus polymyxa* assembly was scaffolded against reference genome `NZ_CP024795.1` using RagTag, followed by FastANI comparison with the reference genome.
