@@ -1,0 +1,21 @@
+## Barcode classification and demultiplexing
+
+Demultiplexing performance was summarized as the proportion of reads assigned to expected sample barcodes relative to the total number of reads subjected to barcode classification. Reads not assigned to a barcode were recorded as unclassified.
+
+### Sequencing run 1
+
+Barcodes 1–10 were used.
+
+- Total reads subjected to barcode classification: 302,659
+- Reads assigned to expected sample barcodes: 274,029 (90.5%)
+- Unclassified reads: 28,613 (9.5%)
+- Reads assigned outside the expected barcode range: 17 (<0.01%)
+
+### Sequencing run 2
+
+Barcodes 11–24 were used.
+
+- Total reads subjected to barcode classification: 305,315
+- Reads assigned to expected sample barcodes: 269,405 (88.2%)
+- Unclassified reads: 35,564 (11.6%)
+- Reads assigned outside the expected barcode range: 346 (0.1%)
