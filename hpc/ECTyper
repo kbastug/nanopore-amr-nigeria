@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Example ECTyper workflow used on MSI
+# ECTyper version: 2.0.0
+# Database version: 1.0
+# Purpose: in-silico O- and H-antigen serotyping of Escherichia coli assemblies
+
+ectyper \
+  -i sample_assembly.fasta \
+  -o ectyper_output
